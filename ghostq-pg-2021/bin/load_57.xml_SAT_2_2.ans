@@ -1,0 +1,2 @@
+#Seed:  1. free.  Bt:   76, D: 1988.  R:   6, P:  22408, w:    31092, C:  0, T: 0.012 s.
+or(v23, ite(v5, ite(v6, and(v24, v25), v24), or(v25, -v6)))

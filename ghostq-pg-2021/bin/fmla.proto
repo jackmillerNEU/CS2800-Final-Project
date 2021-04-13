@@ -1,0 +1,87 @@
+#ifdef FPROTO_FmlaLexer
+    void init_from_str(const char* str);
+    void init_from_file(const char* _filename);
+    void AdvLine();
+    bool IsEOF();
+    char peek();
+    char* StrCurTokPos();
+    void AdvTok();
+    void SaveTok();
+    void EatTok(const char* expected);
+#endif
+#ifdef FPROTO_Fmla
+    void calc_hash();
+    Fmla* flatten_andor();
+    Fmla* flatten_andor_rec(std::map<Fmla*,int>& hit, std::map<Fmla*,Fmla*>& cache);
+    Fmla* negate();
+    Fmla* negate_push();
+    double tree_size();
+    int dag_size(std::set<Fmla*>& hit);
+    int dag_size();
+    Fmla* sort_andor_args_nonrec();
+    Fmla* simp_ite();
+    Fmla* to_nnf();
+    Fmla* nnf_to_aig();
+    bool is_quant();
+    bool is_lit();
+    Fmla* var_of_lit();
+    const char* name_of_var();
+    Fmla* eval_resolve(std::map<Fmla*, Fmla*>& cache);
+    std::map<Fmla*,Fmla*>* litset_to_varmap();
+    Fmla* subst_asgn(Fmla* asgn);
+    Fmla* subst(std::map<Fmla*,Fmla*>& rep, std::map<Fmla*,Fmla*>& cache);
+    Fmla* subst_one(Fmla* var, Fmla* val);
+    void find_vars_in_fmla(std::set<Fmla*>* vars);
+    void find_vars_in_fmla(std::set<Fmla*>* vars, std::set<Fmla*>* hit);
+    void count_fmla_refs(std::map<Fmla*, int>& hit);
+    Fmla* to_bdd(std::vector<Fmla*>& var_order, int var_pos, std::map<Fmla*,Fmla*>& cache);
+    Fmla* to_bdd();
+#endif
+#ifdef FPROTO_FmlaParser
+    Fmla* parse();
+#endif
+#ifdef FPROTO_Fmla
+    void find_repr_sizes(FmlaWriterOpts& opts);
+    void write(FILE* out);
+    void write(FmlaWriterOpts opts);
+    void write();
+    int write_rec(FmlaWriterOpts& opts, int indent);
+    bool match_pat(Fmla* pat, std::vector<Fmla*>* result);
+    Fmla* find_ites_in_aig();
+    Fmla* find_ites_in_aig_rec(std::vector<Fmla*>& m, std::map<Fmla*,Fmla*>& cache);
+#endif
+#ifdef FPROTO_FmlaBinWriter
+    void write_int(unsigned int x);
+    void write_str(const char* str);
+    void analyze(Fmla* fmla);
+    void write_hdr();
+    void write_rec(Fmla* fmla);
+    void write_file(Fmla* fmla);
+#endif
+#ifdef FPROTO_Fmla
+    void write_bin(FILE* out);
+#endif
+#ifdef FPROTO_FmlaBinReader
+    int read_int();
+    Fmla* read_file();
+    char* read_str();
+    void read_hdr();
+    Fmla* read_rec();
+#endif
+#ifdef FPROTO_Fmla
+    Fmla* get_sat_asgn(const char* minisat_exe, struct minisat_stats* p_stats);
+    void write_gq(FILE* out, std::set<Fmla*>* hit);
+    char* get_tmp_pfx(int* next_val);
+    void number_subfmlas(std::map<Fmla*,int>& fmla_to_num, int* cur_num);
+    void write_qcir(FILE* out);
+    void write_qcir_lit(FILE* out, std::map<Fmla*,int>& fmla_to_num, const char* pfx);
+    void write_qcir_rec(FILE* out, std::set<Fmla*>* hit, std::map<Fmla*,int>& fmla_to_num, const char* pfx);
+    std::map<Fmla*,Fmla*>* assoc_list_to_map();
+#endif
+#ifdef FPROTO_SeqCkt
+    Fmla* get_trans_rel();
+    Fmla* new_latch_to_old(Fmla* new_latch);
+    Fmla* reach_fwd_one();
+    Fmla* reach_back_one();
+    Fmla* to_fmla();
+#endif
