@@ -731,30 +731,9 @@ btn_ck3 = tk.Button(master=frm_bot, text="", bg ="gray", command=ck3_pressed)
 btn_ck3.grid(sticky="nsew", row=2, column=2)
 window.mainloop()
 
-
-
-
-
-#board = [[['x', 'x', ' '],
-#         [' ', 'o', ' '],
-#         [' ', ' ', ' ']],
-#         [[' ', ' ', ' '],
-#         [' ', ' ', ' '],
-#         [' ', ' ', ' ']],
-#         [[' ', ' ', ' '],
-#         [' ', ' ', ' '],
-#         [' ', ' ', ' ']]];
-
 turns = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9',
         't10', 't11', 't12', 't13', 't14', 't15', 't16', 't17', 't18',
         't19', 't20', 't21', 't22', 't23', 't24', 't25', 't26', 't27'];
-
-#for i in range(3):
-#    for j in range(3):
-#        for k in range(3):
-#            print('Position '+ str(i + 1) + ', ' + 
-#                  str(j + 1) + ', ' + str(k + 1) + ':');
-#            board[i][j][k] = input();
 
 
 numTurns = 0;
@@ -789,7 +768,7 @@ for i in range(27):
         blackTurnsStr += turns[i] + ' ';
            
 
-f = open("output.txt", "a");
+f = open("boardMap.qdimacs", "a");
 f.truncate(0);
 f.write("#version\n");
 f.write("1.0\n");
