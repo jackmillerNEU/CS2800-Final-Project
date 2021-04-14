@@ -24,7 +24,10 @@ def draw_board():
         for j in range(3):
             print('     |     |     ')
             for k in range(3):
-                row = row + '  ' + board[i][j][k] + '  ';
+                letter = board[i][j][k]
+                if letter == 'BLOCK':
+                    letter = 'B'
+                row = row + '  ' + letter + '  ';
                 if k == 0 or k == 1:
                     row += '|'
             print(row);
@@ -43,6 +46,9 @@ def place_x():
 def place_o():
     global placing_x
     placing_x = 0
+def place_block():
+    global placing_x
+    placing_x = 2
 def done():
     window.destroy()
     draw_board()
@@ -73,14 +79,19 @@ def ai1_pressed():
     j=0;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ai1 = tk.Button(master=frm_top, text=val, command=ai1_pressed)
+        color = 'gray90';
+    btn_ai1 = tk.Button(master=frm_top, text=val, bg=color, command=ai1_pressed)
     btn_ai1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def ai2_pressed():
@@ -88,14 +99,19 @@ def ai2_pressed():
     j=0;
     k=1;
     global board
-    if board[i][j][k] == ' ':
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
         if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ai2 = tk.Button(master=frm_top, text=val, command=ai2_pressed)
+        color = 'gray90';
+    btn_ai2 = tk.Button(master=frm_top, text=val, bg=color, command=ai2_pressed)
     btn_ai2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def ai3_pressed():
@@ -103,14 +119,19 @@ def ai3_pressed():
     j=0;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ai3 = tk.Button(master=frm_top, text=val, command=ai3_pressed)
+        color = 'gray90';
+    btn_ai3 = tk.Button(master=frm_top, text=val, bg=color,  command=ai3_pressed)
     btn_ai3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -119,14 +140,19 @@ def aj1_pressed():
     j=1;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ai1 = tk.Button(master=frm_top, text=val, command=aj1_pressed)
+        color = 'gray90';
+    btn_ai1 = tk.Button(master=frm_top, text=val, bg=color,  command=aj1_pressed)
     btn_ai1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -135,14 +161,19 @@ def aj2_pressed():
     j=1;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_aj2 = tk.Button(master=frm_top, text=val, command=aj2_pressed)
+        color = 'gray90';
+    btn_aj2 = tk.Button(master=frm_top, text=val, bg=color,  command=aj2_pressed)
     btn_aj2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -151,14 +182,19 @@ def aj3_pressed():
     j=1;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_aj3 = tk.Button(master=frm_top, text=val, command=aj3_pressed)
+        color = 'gray90';
+    btn_aj3 = tk.Button(master=frm_top, text=val, bg=color,  command=aj3_pressed)
     btn_aj3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -167,14 +203,19 @@ def ak1_pressed():
     j=2;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ak1 = tk.Button(master=frm_top, text=val, command=ak1_pressed)
+        color = 'gray90';
+    btn_ak1 = tk.Button(master=frm_top, text=val,  bg=color,  command=ak1_pressed)
     btn_ak1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -183,14 +224,19 @@ def ak2_pressed():
     j=2;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ak2 = tk.Button(master=frm_top, text=val, command=ak2_pressed)
+        color = 'gray90';
+    btn_ak2 = tk.Button(master=frm_top, text=val, bg=color,  command=ak2_pressed)
     btn_ak2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -199,14 +245,19 @@ def ak3_pressed():
     j=2;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray90';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ak3 = tk.Button(master=frm_top, text=val, command=ak3_pressed)
+        color = 'gray90';
+    btn_ak3 = tk.Button(master=frm_top, text=val, bg=color,  command=ak3_pressed)
     btn_ak3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
     
@@ -217,14 +268,19 @@ def bi1_pressed():
     j=0;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bi1 = tk.Button(master=frm_mid, text=val, command=bi1_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bi1 = tk.Button(master=frm_mid, text=val, command=bi1_pressed, bg=color)
     btn_bi1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def bi2_pressed():
@@ -232,14 +288,19 @@ def bi2_pressed():
     j=0;
     k=1;
     global board
-    if board[i][j][k] == ' ':
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
         if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bi2 = tk.Button(master=frm_mid, text=val, command=bi2_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bi2 = tk.Button(master=frm_mid, text=val, command=bi2_pressed, bg=color)
     btn_bi2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def bi3_pressed():
@@ -247,14 +308,19 @@ def bi3_pressed():
     j=0;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bi3 = tk.Button(master=frm_mid, text=val, command=bi3_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bi3 = tk.Button(master=frm_mid, text=val, bg=color,  command=bi3_pressed,)
     btn_bi3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -263,14 +329,19 @@ def bj1_pressed():
     j=1;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bi1 = tk.Button(master=frm_mid, text=val, command=bj1_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bi1 = tk.Button(master=frm_mid, text=val, bg=color,  command=bj1_pressed)
     btn_bi1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -279,14 +350,19 @@ def bj2_pressed():
     j=1;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bj2 = tk.Button(master=frm_mid, text=val, command=bj2_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bj2 = tk.Button(master=frm_mid, text=val, bg=color,  command=bj2_pressed)
     btn_bj2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -295,14 +371,19 @@ def bj3_pressed():
     j=1;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bj3 = tk.Button(master=frm_mid, text=val, command=bj3_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bj3 = tk.Button(master=frm_mid, text=val, bg=color,  command=bj3_pressed)
     btn_bj3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -311,14 +392,19 @@ def bk1_pressed():
     j=2;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bk1 = tk.Button(master=frm_mid, text=val, command=bk1_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bk1 = tk.Button(master=frm_mid, text=val, bg=color,  command=bk1_pressed)
     btn_bk1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -327,14 +413,19 @@ def bk2_pressed():
     j=2;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bk2 = tk.Button(master=frm_mid, text=val, command=bk2_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bk2 = tk.Button(master=frm_mid, text=val, bg=color,  command=bk2_pressed)
     btn_bk2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -343,14 +434,19 @@ def bk3_pressed():
     j=2;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'lightgray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_bk3 = tk.Button(master=frm_mid, text=val, command=bk3_pressed, bg ="lightgray")
+        color = 'lightgray';
+    btn_bk3 = tk.Button(master=frm_mid, text=val, bg=color,  command=bk3_pressed)
     btn_bk3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -361,14 +457,19 @@ def ci1_pressed():
     j=0;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ci1 = tk.Button(master=frm_bot, text=val, command=ci1_pressed, bg ="gray")
+        color = 'gray';
+    btn_ci1 = tk.Button(master=frm_bot, text=val, bg=color,  command=ci1_pressed)
     btn_ci1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def ci2_pressed():
@@ -376,14 +477,19 @@ def ci2_pressed():
     j=0;
     k=1;
     global board
-    if board[i][j][k] == ' ':
+    color = 'gray';
+    if board[i][j][k] == ' ':    
         if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    ctn_ai2 = tk.Button(master=frm_bot, text=val, command=ci2_pressed, bg ="gray")
+        color = 'gray';
+    ctn_ai2 = tk.Button(master=frm_bot, text=val, bg=color,  command=ci2_pressed)
     ctn_ai2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 def ci3_pressed():
@@ -391,14 +497,19 @@ def ci3_pressed():
     j=0;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ci3 = tk.Button(master=frm_bot, text=val, command=ci3_pressed, bg ="gray")
+        color = 'gray';
+    btn_ci3 = tk.Button(master=frm_bot, text=val, bg=color,  command=ci3_pressed)
     btn_ci3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -407,14 +518,19 @@ def cj1_pressed():
     j=1;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ci1 = tk.Button(master=frm_bot, text=val, command=cj1_pressed, bg ="gray")
+        color = 'gray';
+    btn_ci1 = tk.Button(master=frm_bot, text=val, bg=color,  command=cj1_pressed)
     btn_ci1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -423,14 +539,19 @@ def cj2_pressed():
     j=1;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_cj2 = tk.Button(master=frm_bot, text=val, command=cj2_pressed, bg ="gray")
+        color = 'gray';
+    btn_cj2 = tk.Button(master=frm_bot, text=val, bg=color,  command=cj2_pressed)
     btn_cj2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -439,14 +560,19 @@ def cj3_pressed():
     j=1;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_cj3 = tk.Button(master=frm_bot, text=val, command=cj3_pressed, bg ="gray")
+        color = 'gray';
+    btn_cj3 = tk.Button(master=frm_bot, text=val, bg=color,  command=cj3_pressed)
     btn_cj3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -455,14 +581,19 @@ def ck1_pressed():
     j=2;
     k=0;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ck1 = tk.Button(master=frm_bot, text=val, command=ck1_pressed, bg ="gray")
+        color = 'gray';
+    btn_ck1 = tk.Button(master=frm_bot, text=val, bg=color,  command=ck1_pressed)
     btn_ck1.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -471,14 +602,19 @@ def ck2_pressed():
     j=2;
     k=1;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ck2 = tk.Button(master=frm_bot, text=val, command=ck2_pressed, bg ="gray")
+        color = 'gray';
+    btn_ck2 = tk.Button(master=frm_bot, text=val, bg=color,  command=ck2_pressed)
     btn_ck2.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
 
@@ -487,14 +623,19 @@ def ck3_pressed():
     j=2;
     k=2;
     global board
-    if board[i][j][k] == ' ':
-        if placing_x:
+    color = 'gray';
+    if board[i][j][k] == ' ':    
+        if placing_x == 1:
             val = 'x'
-        else:
+        elif placing_x == 0:
             val = 'o'
+        elif placing_x == 2:
+            val = 'BLOCK'
+            color = 'red';
     else:
         val = ' '
-    btn_ck3 = tk.Button(master=frm_bot, text=val, command=ck3_pressed, bg ="gray")
+        color = 'gray';
+    btn_ck3 = tk.Button(master=frm_bot, bg=color, text=val, command=ck3_pressed)
     btn_ck3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
     
@@ -511,6 +652,9 @@ btn_x.pack(side=tk.LEFT, padx = 10, ipadx = 10)
 btn_o = tk.Button(master=frm_buttons, text="o", bg="white", command=place_o)
 btn_o.pack(side=tk.LEFT, padx = 10, ipadx = 10)
 
+btn_block = tk.Button(master=frm_buttons, text="block", bg="red", command=place_block)
+btn_block.pack(side=tk.LEFT, padx = 10, ipadx = 10)
+
 btn_done = tk.Button(master=frm_buttons, text="Done", bg="white", command=done)
 btn_done.pack(side=tk.RIGHT, padx = 10, ipadx = 10)
 
@@ -519,23 +663,23 @@ frm_top.columnconfigure([0,1,2], weight=1, minsize=50)
 frm_top.rowconfigure([0,1,2], weight=1, minsize=50)
 frm_top.pack(fill=tk.BOTH)
 
-btn_ai1 = tk.Button(master=frm_top, text="", command=ai1_pressed)
+btn_ai1 = tk.Button(master=frm_top, text="", bg ="gray90", command=ai1_pressed)
 btn_ai1.grid(sticky="nsew", row=0, column=0)
-btn_ai2 = tk.Button(master=frm_top, text="", command=ai2_pressed)
+btn_ai2 = tk.Button(master=frm_top, text="", bg ="gray90", command=ai2_pressed)
 btn_ai2.grid(sticky="nsew", row=0, column=1)
-btn_ai3 = tk.Button(master=frm_top, text="", command=ai3_pressed)
+btn_ai3 = tk.Button(master=frm_top, text="", bg ="gray90", command=ai3_pressed)
 btn_ai3.grid(sticky="nsew", row=0, column=2)
-btn_aj1 = tk.Button(master=frm_top, text="", command=aj1_pressed)
+btn_aj1 = tk.Button(master=frm_top, text="", bg ="gray90", command=aj1_pressed)
 btn_aj1.grid(sticky="nsew", row=1, column=0)
-btn_aj2 = tk.Button(master=frm_top, text="", command=aj2_pressed)
+btn_aj2 = tk.Button(master=frm_top, text="", bg ="gray90", command=aj2_pressed)
 btn_aj2.grid(sticky="nsew", row=1, column=1)
-btn_aj3 = tk.Button(master=frm_top, text="", command=aj3_pressed)
+btn_aj3 = tk.Button(master=frm_top, text="", bg ="gray90", command=aj3_pressed)
 btn_aj3.grid(sticky="nsew", row=1, column=2)
-btn_ak1 = tk.Button(master=frm_top, text="", command=ak1_pressed)
+btn_ak1 = tk.Button(master=frm_top, text="", bg ="gray90", command=ak1_pressed)
 btn_ak1.grid(sticky="nsew", row=2, column=0)
-btn_ak2 = tk.Button(master=frm_top, text="", command=ak2_pressed)
+btn_ak2 = tk.Button(master=frm_top, text="", bg ="gray90", command=ak2_pressed)
 btn_ak2.grid(sticky="nsew", row=2, column=1)
-btn_ak3 = tk.Button(master=frm_top, text="", command=ak3_pressed)
+btn_ak3 = tk.Button(master=frm_top, text="", bg ="gray90", command=ak3_pressed)
 btn_ak3.grid(sticky="nsew", row=2, column=2)
 
 frm_mid = tk.Frame(master=window, bg="yellow", width=150)
@@ -660,9 +804,15 @@ f.write(blackTurnsStr + "\n");
 
 #positions
 f.write("#positions\n");
-f.write("ai1 ai2 ai3 aj1 aj2 aj3 ak1 ak2 ak3 " +
-        "bi1 bi2 bi3 bj1 bj2 bj3 bk1 bk2 bk3 " +
-        "ci1 ci2 ci3 cj1 cj2 cj3 ck1 ck2 ck3\n");
+
+pos = '';
+for i in range(3):
+    for j in range(3):
+        for k in range(3):
+            if board[i][j][k] != 'BLOCK':
+                pos = pos + ijk_to_pos(i,j,k) + ' '
+
+f.write(pos + '\n');
 
 #ai1 ai2 ai3 
 #aj1 aj2 aj3 
