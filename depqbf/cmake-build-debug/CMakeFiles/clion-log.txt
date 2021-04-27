@@ -1,0 +1,1 @@
+CMakeLists.txt not found in /home/vedad/Informatik/ijtihad-dev/depqbf-version-5.01/depqbf-version-5.01

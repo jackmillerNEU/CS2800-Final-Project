@@ -1,0 +1,35 @@
+#blackinitials
+aj2 cj2 
+#whiteinitials
+aj1 cj3 
+#times
+t5 
+#blackturns
+t5 
+#positions
+ai1 ai2 ai3 aj1 aj2 aj3 ak1 ak2 ak3 bj2 ci1 ci2 ci3 cj1 cj2 cj3 ck1 ck2 ck3 
+#blackwins
+ai1 ai2 ai3
+aj1 aj2 aj3
+ak1 ak2 ak3
+ci1 ci2 ci3
+cj1 cj2 cj3
+ck1 ck2 ck3
+ai1 aj1 ak1
+ci1 cj1 ck1
+ai2 aj2 ak2
+ci2 cj2 ck2
+ai3 aj3 ak3
+ci3 cj3 ck3
+ai1 aj2 ak3
+ci1 cj2 ck3
+ai3 aj2 ak1
+aj2 bj2 cj2
+ai2 bj2 ck2
+ak2 bj2 ci2
+aj1 bj2 cj3
+aj3 bj2 cj1
+ai1 bj2 ck3
+ai3 bj2 ck3
+ak1 bj2 ci3
+ak3 bj2 ci1
