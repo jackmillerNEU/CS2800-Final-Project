@@ -3,10 +3,12 @@
 #
 #
 
+import tkinter as tk;
 
+# Output directory
+dir = "C:\\Users\\mille\\OneDrive\\Desktop\\positional-games-qbf-encoding-master\\positional-games-qbf-encoding-master\\maps\\";
 
-import tkinter as tk
-
+# initialize board
 board = [[[' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' ']],
@@ -17,6 +19,7 @@ board = [[[' ', ' ', ' '],
           [' ', ' ', ' '],
           [' ', ' ', ' ']]];
 
+# TESTS that the output matches the input
 def draw_board():
     global board
     row = '';
@@ -38,22 +41,7 @@ def draw_board():
             row = ''
         print()
 
-placing_x = 1
-
-def place_x():
-    global placing_x
-    placing_x = 1
-def place_o():
-    global placing_x
-    placing_x = 0
-def place_block():
-    global placing_x
-    placing_x = 2
-def done():
-    window.destroy()
-    draw_board()
-    
-    
+# converter of position keys
 def ijk_to_pos(i, j, k):
     pos = '';
     if i == 0:
@@ -71,9 +59,26 @@ def ijk_to_pos(i, j, k):
     pos += str(k + 1);
 #    print(str(i) + ' ' + str(j) + ' ' + str(k));
 #    print(pos);
-    return pos       
+    return pos          
 
+# what is being placed
+placing_x = 1
 
+# functions for each button
+def place_x():
+    global placing_x
+    placing_x = 1
+def place_o():
+    global placing_x
+    placing_x = 0
+def place_block():
+    global placing_x
+    placing_x = 2
+def done():
+    window.destroy()
+    draw_board()     
+
+# funcions for each board space
 def ai1_pressed():
     i=0;
     j=0;
@@ -639,6 +644,8 @@ def ck3_pressed():
     btn_ck3.grid(sticky="nsew", row=j, column=k)
     board[i][j][k] = val
     
+############################################################
+# gui code
 
 window = tk.Tk()
 window.title('Board Setup')
@@ -731,13 +738,19 @@ btn_ck3 = tk.Button(master=frm_bot, text="", bg ="gray", command=ck3_pressed)
 btn_ck3.grid(sticky="nsew", row=2, column=2)
 window.mainloop()
 
+############################################################
+# End gui code
+
+
+# all possible turns
 turns = ['t1', 't2', 't3', 't4', 't5', 't6', 't7', 't8', 't9',
         't10', 't11', 't12', 't13', 't14', 't15', 't16', 't17', 't18',
         't19', 't20', 't21', 't22', 't23', 't24', 't25', 't26', 't27'];
 
-
+# tracks number of pieces
 numTurns = 0;
 
+# the positions of 0
 whiteinits = '';
 for i in range(3):
     for j in range(3):
@@ -746,6 +759,7 @@ for i in range(3):
                 whiteinits += ijk_to_pos(i, j, k) + ' ';
                 numTurns += 1;
                 
+# the positions of X
 blackinits = '';
 for i in range(3):
     for j in range(3):
@@ -754,25 +768,31 @@ for i in range(3):
                 blackinits += ijk_to_pos(i, j, k) + ' ';
                 numTurns += 1;
                 
-
+# Times where a player can play (currently set to just one move ahead)  
 turnsStr = '';
 for i in range(27):
-    if i >= numTurns:
+    if i == numTurns:
         turnsStr += turns[i] + ' ';
         
-# 
-      
+# Times where black can play (currently set to just one move ahead)    
 blackTurnsStr = '';
 for i in range(27):
-    if i >= numTurns and i % 2 == 0:
+    if i == numTurns and i % 2 == 0:
         blackTurnsStr += turns[i] + ' ';
            
+fname = input("Enter file name:");
 
-f = open("boardMap.qdimacs", "a");
+# File name should end in .pg
+f = open(dir + fname, "a");
 f.truncate(0);
-f.write("#version\n");
-f.write("1.0\n");
 
+#blackinitials
+f.write("#blackinitials\n");
+f.write(blackinits + '\n');
+
+#blackinitials
+f.write("#whiteinitials\n");
+f.write(whiteinits + '\n');
 #times
 f.write("#times\n");
 f.write(turnsStr + "\n");
@@ -789,7 +809,8 @@ for i in range(3):
     for j in range(3):
         for k in range(3):
             if board[i][j][k] != 'BLOCK':
-                pos = pos + ijk_to_pos(i,j,k) + ' '
+                pos = pos + ijk_to_pos(i,j,k) + ' ';
+                
 
 f.write(pos + '\n');
 
@@ -810,69 +831,68 @@ f.write("#blackwins\n");
 
 #2d wins ******************************************
 #horizontal wins
-f.write("ai1 ai2 ai3\naj1 aj2 aj3\nak1 ak2 ak3\n" +
-        "bi1 bi2 bi3\nbj1 bj2 bj3\nbk1 bk2 bk3\n" +
-        "ci1 ci2 ci3\ncj1 cj2 cj3\nck1 ck2 ck3\n");
+w1="ai1 ai2 ai3";w2="aj1 aj2 aj3";w3="ak1 ak2 ak3";
+w4="bi1 bi2 bi3";w5="bj1 bj2 bj3";w6="bk1 bk2 bk3";
+w7="ci1 ci2 ci3";w8="cj1 cj2 cj3";w9="ck1 ck2 ck3";
+#f.write("ai1 ai2 ai3\naj1 aj2 aj3\nak1 ak2 ak3\n" +
+#        "bi1 bi2 bi3\nbj1 bj2 bj3\nbk1 bk2 bk3\n" +
+#        "ci1 ci2 ci3\ncj1 cj2 cj3\nck1 ck2 ck3\n");
 #vertical wins
-f.write("ai1 aj1 ak1\nbi1 bj1 bk1\nci1 cj1 ck1\n" +
-        "ai2 aj2 ak2\nbi2 bj2 bk2\nci2 cj2 ck2\n" +
-        "ai3 aj3 ak3\nbi3 bj3 bk3\nci3 cj3 ck3\n");
+w10="ai1 aj1 ak1";w11="bi1 bj1 bk1";w12="ci1 cj1 ck1";
+w13="ai2 aj2 ak2";w14="bi2 bj2 bk2";w15="ci2 cj2 ck2";
+w16="ai3 aj3 ak3";w17="bi3 bj3 bk3";w18="ci3 cj3 ck3";
+#f.write("ai1 aj1 ak1\nbi1 bj1 bk1\nci1 cj1 ck1\n" +
+#        "ai2 aj2 ak2\nbi2 bj2 bk2\nci2 cj2 ck2\n" +
+#        "ai3 aj3 ak3\nbi3 bj3 bk3\nci3 cj3 ck3\n");
 #diagonal wins
-f.write("ai1 aj2 ak3\nbi1 bj2 bk3\nci1 cj2 ck3\n" +
-        "ai3 aj2 ak1\nbi3 bj2 bk1\nbi3 bj2 bk1\n");
+w19="ai1 aj2 ak3";w20="bi1 bj2 bk3";w21="ci1 cj2 ck3";
+w22="ai3 aj2 ak1";w23="bi3 bj2 bk1";w24="ci3 cj2 bk1";
+#f.write("ai1 aj2 ak3\nbi1 bj2 bk3\nci1 cj2 ck3\n" +
+#        "ai3 aj2 ak1\nbi3 bj2 bk1\nci3 cj2 ck1\n");
 #3d wins ******************************************
 #column wins
-f.write("ai1 bi1 ci1\nai2 bi2 ci2\nai3 bi3 ci3\n" +
-        "aj1 bj1 cj1\naj2 bj2 cj2\naj3 bj3 cj3\n" +
-        "ak1 bk1 ck1\nak2 bk2 ck2\nak3 bk3 ck3\n");
+w25="ai1 bi1 ci1";w26="ai2 bi2 ci2";w27="ai3 bi3 ci3";
+w28="aj1 bj1 cj1";w29="aj2 bj2 cj2";w30="aj3 bj3 cj3";
+w31="ak1 bk1 ck1";w32="ak2 bk2 ck2";w33="ak3 bk3 ck3";
+#f.write("ai1 bi1 ci1\nai2 bi2 ci2\nai3 bi3 ci3\n" +
+#        "aj1 bj1 cj1\naj2 bj2 cj2\naj3 bj3 cj3\n" +
+#        "ak1 bk1 ck1\nak2 bk2 ck2\nak3 bk3 ck3\n");
 # diagonal wins top-bottom
-f.write("ai1 bj1 ck1\nai2 bj2 ck2\nai3 bj3 ck3\n" +
-        "ak1 bj1 ci1\nak2 bj2 ci2\nak3 bj3 ci3\n");
+w34="ai1 bj1 ck1";w35="ai2 bj2 ck2";w36="ai3 bj3 ck3";
+w37="ak1 bj1 ci1";w38="ak2 bj2 ci2";w39="ak3 bj3 ci3";
+#f.write("ai1 bj1 ck1\nai2 bj2 ck2\nai3 bj3 ck3\n" +
+#        "ak1 bj1 ci1\nak2 bj2 ci2\nak3 bj3 ci3\n");
 # diagonal wins left-right
-f.write("ai1 bi2 ci3\naj1 bj2 cj3\nak1 bk2 ck3\n" +
-        "ai3 bi2 ci1\naj3 bj2 cj1\nak3 bk2 ck1\n");
+w40="ai1 bi2 ci3";w41="aj1 bj2 cj3";w42="ak1 bk2 ck3";
+w43="ai3 bi2 ci1";w44="aj3 bj2 cj1";w45="ak3 bk2 ck1";
+#f.write("ai1 bi2 ci3\naj1 bj2 cj3\nak1 bk2 ck3\n" +
+#        "ai3 bi2 ci1\naj3 bj2 cj1\nak3 bk2 ck1\n");
 # diagonal wins corner-corner
-f.write("ai1 bj2 ck3\nai3 bj2 ck3\n" + 
-        "ak1 bj2 ci3\nak3 bj2 ci1\n");
+w46="ai1 bj2 ck3";w47="ai3 bj2 ck3";
+w48="ak1 bj2 ci3";w49="ak3 bj2 ci1";
+#f.write("ai1 bj2 ck3\nai3 bj2 ck3\n" + 
+#        "ak1 bj2 ci3\nak3 bj2 ci1");
 
-#blackinitials
-f.write("#blackturns\n");
-f.write(blackinits + '\n');
+wins = [w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11,w12,w13,w14,w15,w16,w17,w18,w19,w20,w21,w22,w23,w24,w25,w26,w27,w28,w29,w30,w31,w32,w33,w34,w35,w36,w37,w38,w39,w40,w41,w42,w43,w44,w45,w46,w47,w48,w49];
 
-#whitewins
-f.write("#whitewins\n");
+# removes win options that are blocked
+n = 0;
+toRemove = [];
+for i in range(3):
+    for j in range(3):
+        for k in range(3):
+            if board[i][j][k] == 'BLOCK':
+                for w in wins:
+                    pos = ijk_to_pos(i,j,k);
+                    if pos in w and w not in toRemove:
+                        toRemove.append(w);
+                        n = n + 1
 
-#2d wins ******************************************
-#horizontal wins
-f.write("ai1 ai2 ai3\naj1 aj2 aj3\nak1 ak2 ak3\n" +
-        "bi1 bi2 bi3\nbj1 bj2 bj3\nbk1 bk2 bk3\n" +
-        "ci1 ci2 ci3\ncj1 cj2 cj3\nck1 ck2 ck3\n");
-#vertical wins
-f.write("ai1 aj1 ak1\nbi1 bj1 bk1\nci1 cj1 ck1\n" +
-        "ai2 aj2 ak2\nbi2 bj2 bk2\nci2 cj2 ck2\n" +
-        "ai3 aj3 ak3\nbi3 bj3 bk3\nci3 cj3 ck3\n");
-#diagonal wins
-f.write("ai1 aj2 ak3\nbi1 bj2 bk3\nci1 cj2 ck3\n" +
-        "ai3 aj2 ak1\nbi3 bj2 bk1\nbi3 bj2 bk1\n");
-#3d wins ******************************************
-#column wins
-f.write("ai1 bi1 ci1\nai2 bi2 ci2\nai3 bi3 ci3\n" +
-        "aj1 bj1 cj1\naj2 bj2 cj2\naj3 bj3 cj3\n" +
-        "ak1 bk1 ck1\nak2 bk2 ck2\nak3 bk3 ck3\n");
-# diagonal wins top-bottom
-f.write("ai1 bj1 ck1\nai2 bj2 ck2\nai3 bj3 ck3\n" +
-        "ak1 bj1 ci1\nak2 bj2 ci2\nak3 bj3 ci3\n");
-# diagonal wins left-right
-f.write("ai1 bi2 ci3\naj1 bj2 cj3\nak1 bk2 ck3\n" +
-        "ai3 bi2 ci1\naj3 bj2 cj1\nak3 bk2 ck1\n");
-# diagonal wins corner-corner
-f.write("ai1 bj2 ck3\nai3 bj2 ck3\n" + 
-        "ak1 bj2 ci3\nak3 bj2 ci1\n");
-
-#blackinitials
-f.write("#whiteturns\n");
-f.write(whiteinits);
-
-
+for w in toRemove:
+    print("removing " + w);
+    wins.remove(w);
+    
+for w in wins:
+    f.write(w + '\n');
+    
 f.close();
-
